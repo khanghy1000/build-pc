@@ -1,6 +1,6 @@
-import { client } from "../../db.js";
+import { client } from '../../db.js';
 import { v4 as uuidv4 } from 'uuid';
-import { transporter } from "../../email.js";
+import { transporter } from '../../email.js';
 
 async function getForgotPassword(req, res) {
   const idcheck = (
@@ -230,6 +230,7 @@ async function postForgotPassword(req, res) {
         ])
       ).rows[0];
       console.log(user);
+      const url = process.env.URL;
       await transporter.sendMail({
         from: '"Yurixahri BOT" <no-reply@yurixahri.net>', // sender address
         to: user.email, // list of receivers
@@ -237,7 +238,7 @@ async function postForgotPassword(req, res) {
         text: '', // plain text body
         html: `
                 <p>Nhấn vào đường dẫn để thay đổi mật khẩu</p>
-                <a href="/renew_password?token=${token}">Link</a>
+                <a href="${url}/renew_password?token=${token}">Link</a>
                 <img src="https://server.yurixahri.net/Photos/kaboom.jpg" alt="Kaboom" width="100" height="100">
                 `, // html body
       });
