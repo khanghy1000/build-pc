@@ -1,5 +1,6 @@
 import { client } from "../../db.js";
 import { v4 as uuidv4 } from 'uuid';
+import { transporter } from "../../email.js";
 
 async function getForgotPassword(req, res) {
   const idcheck = (

@@ -6,8 +6,6 @@ import bodyParser from 'body-parser';
 const { urlencoded, json } = bodyParser;
 import 'dotenv/config';
 
-import nodemailer from 'nodemailer';
-
 import { getHomepage } from './handlers/homepage.js';
 import { getGuide } from './handlers/guide.js';
 import { getRegister, postRegister } from './handlers/auth/register.js';
@@ -38,7 +36,9 @@ import {
   getBuildListPublic,
   searchBuild,
 } from './handlers/build.js';
+
 import { client } from './db.js';
+import { transporter } from './email.js';
 
 const app = express();
 app.use(logger('dev'));
@@ -46,19 +46,6 @@ app.use(cors());
 app.use(urlencoded({ extended: false }));
 app.use(json());
 app.use(cookieParser());
-
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, // true for port 465, false for other ports
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
 
 app.get('/', getHomepage);
 app.get('/guide', getGuide);
