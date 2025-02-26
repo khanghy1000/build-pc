@@ -1,5 +1,5 @@
-import { client } from "../db.js";
-import { money } from "../utils.js";
+import { client } from '../db.js';
+import { money } from '../utils.js';
 
 async function deleteComponent(req, res) {
   const idcheck = (
@@ -61,7 +61,7 @@ async function deleteComponent(req, res) {
   }
 }
 
- async function insertComponent(req, res) {
+async function insertComponent(req, res) {
   const idcheck = (
     await client.query(
       `select count(username) from "USERS" where username = $1 and password = $2`,
@@ -142,7 +142,7 @@ async function deleteComponent(req, res) {
   }
 }
 
- async function selectComponent(req, res) {
+async function selectComponent(req, res) {
   const idcheck = (
     await client.query(
       `select count(username) from "USERS" where username = $1 and password = $2`,
@@ -804,280 +804,16 @@ async function deleteComponent(req, res) {
   )
     rowheader += `<th>select</th></tr>`;
 
-  res.send(`
-            <!DOCTYPE html>
-            <html>
-    
-            <head>
-                <meta charset='utf-8'>
-    
-                <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                <meta property="og:title" content="Trang build PC số 1 Việt Nam"/>
-                <meta property="og:image" content="https://server.yurixahri.net/Photos/koishi.png"/>
-                
-                <meta property="og:url" content="${req.path}"/>
-                <meta property="og:site_name" content="Koishi Build PC"/>
-                <meta property="og:description" content="Trang build PC số 1 Việt Nam">
-                <meta property="og:type" content="website"/>
-                <meta name="twitter:card" content="summary_large_image"/>
-                <meta name="twitter:title" content="Trang build PC số 1 Việt Nam"/>
-                <meta name="twitter:description" content="Trang build PC số 1 Việt Nam">
-                <meta name="twitter:image" content="https://server.yurixahri.net/Photos/koishi.png"/>
-
-                <title>Chọn linh kiện</title>
-
-                
-                <link rel="shortcut icon" href="https://server.yurixahri.net/Photos/koishi.png">
-                <style>
-                    body{
-            height: 100vh;
-                        margin: 0;
-                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        background: linear-gradient(to bottom, rgb(15 27 38), rgb(15 27 38));
-                    }
-        
-                    ul li {
-                        list-style: none;
-                        margin: 0 auto;
-                        border-left: 5px solid #3ca0e7;
-        
-                        padding: 10px 30px 10px;
-        
-                        text-decoration: none;
-                        text-align: center;
-        
-                    }
-
-                    table ul li {
-                        list-style: disc;    
-                        padding: 10px;
-                        font-size: 12px;
-                        border-left: none;
-                        white-space: nowrap;
-                    }
-
-                    table ul{
-                        columns: 2;
-                    }
-        
-                    li a {
-                        color: aliceblue;
-                    }
-        
-                    li a:hover {
-                        color: #3ca0e7;
-                    }
-        
-                    li:hover {
-                        cursor: pointer;
-                    }
-        
-                    .dropdown ul {
-                        visibility: hidden;
-                        opacity: 0;
-                        position: absolute;
-                        padding-left: 0;
-                        margin: 0;
-                        display: none;
-                        background: rgb(26, 53, 66);
-                    }
-        
-                    .dropdown a,
-                    .left_cell a {
-                        height: 100%;
-                        display: flex;
-                        align-items: center;
-                    }
-        
-                    .dropdown:hover>ul {
-                        visibility: visible;
-                        opacity: 1;
-                        display: block;
-        
-                        text-align: left;
-        
-                    }
-        
-                    .select-button {
-                        padding: 5px 10px;
-                        border-radius: 5px;
-                        margin-left: 20px;
-                        background-color: #1c86d1;
-                        color: aliceblue;
-                    }
-        
-                    .select-container {
-                        border-bottom: 1px aliceblue dashed;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                    }
-        
-                    .paging {
-                        padding: 4px 10px;
-                        border-radius: 5px;
-                        margin-left: 10px;
-                        margin-right: 10px;
-                        background-color: #1c86d1;
-                    }
-        
-        
-                    table {
-                        font-family: arial, sans-serif;
-                        border-collapse: collapse;
-                        width: 100%;
-                    }
-
-                    table a{
-                        color: #00adff
-                    }
-        
-                    td,
-                    th {
-                        border-bottom: 1px aliceblue dashed;
-                        text-align: center;
-                        padding: 8px;
-                    }
-        
-                    tr:nth-child(even) {
-                        background-color: #00477345;
-                    }
-        
-        
-        
-                    a {
-                        text-decoration: none;
-                        color: aliceblue;
-                        cursor: pointer;
-                    }
-        
-                    #nav a:hover {
-                        color: rgb(0, 136, 255);
-                    }
-        
-                    .left_cell {
-                        margin: 0 10px 0 10px;
-                        height: 100px;
-                    }
-        
-                    
-                .snow-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999;
-    pointer-events: none;
-}
-
-.snowflake {
-    position: absolute;
-    background-color: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    pointer-events: none;
-}
-
-@keyframes fall {
-    0% {
-        opacity: 0;
-        transform: translateY(0);
-    }
-    10% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.5;
-        transform: translateY(100vh);
-    }
-}
-
-@keyframes diagonal-fall {
-    0% {
-        opacity: 0;
-        transform: translate(0, 0);
-    }
-    10% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.25;
-        transform: translate(10vw, 100vh);
-    }
-}
-
-</style>
-    
-            </head>
-    
-            <body>
-                <div class="snow-container"></div>
-<div id="nav"
-                    style="height: 100px; display: flex; background-color: rgb(26, 53, 66); justify-content: space-between">
-                    <div style="display: flex; align-items: center;">
-                        <a href="/"><img src="https://server.yurixahri.net/Photos/koishi.png" width="100" class="left_cell"></a>
-    
-                        <div class="dropdown left_cell">
-                            <a href="#">PRODUCTS</a>
-                            <ul>
-                                <li><a href="/component-select/cpu">CPU</a></li>
-                                <li><a href="/component-select/mb">MOTHERBOARD</a></li>
-                                <li><a href="/component-select/ram">RAM</a></li>
-                                <li><a href="/component-select/vga">VGA</a></li>
-                                <li><a href="/component-select/psu">PSU</a></li>
-                                <li><a href="/component-select/cooler">CPU COOLER</a></li>
-                                <li><a href="/component-select/storage">STORAGE</a></li>
-                                <li><a href="/component-select/case">CASE</a></li>
-                            </ul>
-                        </div>
-                        
-                        <div class="left_cell"><a href="/guide">GUIDE</a></div>
-                        <div class="left_cell"><a href="/build_list_public">BUILDS</a></div>
-                    </div>
-    
-                    <div style="display: flex; align-items: center;">
-                    ${
-                      idcheck == 0
-                        ? `
-                    <div class="left_cell"><a href="/login">LOGIN</a></div>
-                    <div class="left_cell"><a href="/register">REGISTER</a></div>`
-                        : `<div class="dropdown left_cell">
-                        <a>${req.cookies['username']}</a>
-                        <ul style="right: 0">
-                            <li><a href="/logout">Logout</a></li>
-                            <li><a href="/build_list">My Builds</a></li>
-                        </ul>
-                    </div>`
-                    }
-                    </div>
-    
-    
-                </div>
-    
-               
-    
-                <div
-                    style="margin: 50px auto 50px auto; width: 80%;height: fit-content;top: 0;bottom: 0; display: flex; flex-direction: column; color: aliceblue; padding-bottom: 200px;">
-                    <form action="${req.path}" method="get">
-                        <input type="text" name="filter" placeholder="filter" value="${filter}"></input>
-                        ${req.query['build'] == undefined ? '' : `<input name="build" value="${req.query['build']}" style="display: none"></input>`}
-                        <button>Search</button>
-                    </form>
-                    <table>
-                        ${rowheader}
-                        ${rowsdata}
-                    </table>
-    
-                    <div style="margin-top: 20px;">
-                        ${paging}
-                    </div>
-                </div>
-            </body>
-            <script type="text/javascript" src="https://yurixahri.net:83/assets/noel.js"></script>
-            </html>
-            `);
+  res.render('views/component', {
+    idcheck: idcheck,
+    username: req.cookies['username'],
+    build: req.query.build,
+    path: req.path,
+    filter: filter,
+    rowheader: rowheader,
+    rowsdata: rowsdata,
+    paging: paging,
+  });
 }
 
 export { deleteComponent, insertComponent, selectComponent };

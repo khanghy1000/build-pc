@@ -1,0 +1,12 @@
+<% if (idcheck == 0) { %>
+    <div class="left_cell"><a href="/login">LOGIN</a></div>
+    <div class="left_cell"><a href="/register">REGISTER</a></div> :
+<% } else { %>
+    <div class="dropdown left_cell">
+        <a><%=username%></a>
+        <ul style="right: 0">
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/build_list">My Builds</a></li>
+        </ul>
+    </div>
+<% } %>

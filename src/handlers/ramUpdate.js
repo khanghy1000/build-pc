@@ -1,4 +1,4 @@
-import { client } from "../db.js";
+import { client } from '../db.js';
 
 async function getRamUpdate(req, res) {
   const idcheck = (

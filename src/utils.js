@@ -3,4 +3,4 @@ let money = new Intl.NumberFormat('vi-VN', {
   currency: 'VND',
 });
 
-export {money}
+export { money };

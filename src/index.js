@@ -46,6 +46,8 @@ app.use(cors());
 app.use(urlencoded({ extended: false }));
 app.use(json());
 app.use(cookieParser());
+app.set('views', './src');
+app.set('view engine', 'ejs');
 
 app.get('/', getHomepage);
 app.get('/guide', getGuide);

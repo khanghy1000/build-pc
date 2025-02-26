@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <meta property="og:title" content="Trang build PC số 1 Việt Nam" />
+    <meta property="og:image" content="https://server.yurixahri.net/Photos/koishi.png" />
+
+    <meta property="og:url" content="/build_list" />
+    <meta property="og:site_name" content="Koishi Build PC" />
+    <meta property="og:description" content="Trang build PC số 1 Việt Nam">
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Trang build PC số 1 Việt Nam" />
+    <meta name="twitter:description" content="Trang build PC số 1 Việt Nam">
+    <meta name="twitter:image" content="https://server.yurixahri.net/Photos/koishi.png" />
+
+    <title>Danh sách build</title>
+
+
+    <link rel="shortcut icon" href="https://server.yurixahri.net/Photos/koishi.png">
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, rgb(15 27 38), rgb(15 27 38));
+        }
+
+        ul li {
+            list-style: none;
+            margin: 0 auto;
+            border-left: 5px solid #3ca0e7;
+
+            padding: 10px 30px 10px;
+
+            text-decoration: none;
+            text-align: center;
+
+        }
+
+        li a {
+            color: aliceblue;
+        }
+
+        li a:hover {
+            color: #3ca0e7;
+        }
+
+        li:hover {
+            cursor: pointer;
+        }
+
+        .dropdown ul {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            padding-left: 0;
+            margin: 0;
+            display: none;
+            background: rgb(26, 53, 66);
+        }
+
+        .dropdown a,
+        .left_cell a {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown:hover>ul {
+            visibility: visible;
+            opacity: 1;
+            display: block;
+
+            text-align: left;
+
+        }
+
+        .select-button {
+            padding: 5px;
+            border-radius: 5px;
+            margin-left: 20px;
+            background-color: #1c86d1;
+        }
+
+        .select-build {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0 10px 0;
+            background-color: #113b5a84;
+            transition: 0.1s;
+        }
+
+        .select-build:hover {
+            background-color: #34566e84;
+        }
+
+
+
+
+
+
+
+        a {
+            text-decoration: none;
+            color: aliceblue;
+            cursor: pointer;
+        }
+
+        #nav a:hover {
+            color: rgb(0, 136, 255);
+        }
+
+        .left_cell {
+            margin: 0 10px 0 10px;
+            height: 100px;
+        }
+
+        .center {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+
+        }
+
+
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99999;
+            pointer-events: none;
+        }
+
+        .snowflake {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes diagonal-fall {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0);
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.25;
+                transform: translate(10vw, 100vh);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="snow-container"></div>
+    <div id="nav"
+        style="height: 100px; display: flex; background-color: rgb(26, 53, 66); justify-content: space-between; position: relative; z-index: 2">
+        <div style="display: flex; align-items: center;">
+            <a href="/"><img src="https://server.yurixahri.net/Photos/koishi.png" width="100" class="left_cell"></a>
+
+            <div class="dropdown left_cell">
+                <a href="#">PRODUCTS</a>
+                <ul>
+                    <li><a href="/component-select/cpu">CPU</a></li>
+                    <li><a href="/component-select/mb">MOTHERBOARD</a></li>
+                    <li><a href="/component-select/ram">RAM</a></li>
+                    <li><a href="/component-select/vga">VGA</a></li>
+                    <li><a href="/component-select/psu">PSU</a></li>
+                    <li><a href="/component-select/cooler">CPU COOLER</a></li>
+                    <li><a href="/component-select/storage">STORAGE</a></li>
+                    <li><a href="/component-select/case">CASE</a></li>
+                </ul>
+            </div>
+
+            <div class="left_cell"><a href="/guide">GUIDE</a></div>
+            <div class="left_cell"><a href="/build_list_public">BUILDS</a></div>
+        </div>
+
+        <div style="display: flex; align-items: center;">
+            <%- include('navbar') %>
+        </div>
+
+
+    </div>
+
+    <div
+        style="margin: 50px auto 50px auto; width: 70%;height: fit-content;top: 0;bottom: 0; display: flex; flex-direction: column; color: aliceblue; padding-bottom: 200px;">
+        <div style="display: flex; align-items: center;">
+            <h3>You have <%= length %> builds</h3>
+            <a href="/create_build?username= <%= username %>" class="select-button">Create Build</a>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <%- build_list %>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="https://yurixahri.net:83/assets/noel.js"></script>
+
+</html>
