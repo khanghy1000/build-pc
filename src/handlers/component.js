@@ -215,7 +215,7 @@ async function selectComponent(req, res) {
           ddr_list_html += `<li>${e}</li>`;
         });
         ddr_list_html += '</ul>';
-        rowsdata += `<tr>
+        rowsdata += `<tr class="component-item">
                         <td><img width=100 height=100 src="${e.image}"></td>
                         <td>${e.name}</td>
                         <td><a href="${e.link}">link</td>
@@ -278,7 +278,7 @@ async function selectComponent(req, res) {
                                     `;
 
       data.forEach((e) => {
-        rowsdata += `<tr>
+        rowsdata += `<tr class="component-item">
                         <td><img width=100 height=100 src="${e.image}"></td>
                         <td>${e.name}</td>
                         <td><a href="${e.link}">link</td>
@@ -341,7 +341,7 @@ async function selectComponent(req, res) {
                                     `;
 
       data.forEach((e) => {
-        rowsdata += `<tr>
+        rowsdata += `<tr class="component-item">
                         <td><img width=100 height=100 src="${e.image}"></td>
                         <td>${e.name}</td>
                         <td><a href="${e.link}">link</td>
@@ -400,7 +400,7 @@ async function selectComponent(req, res) {
                                     `;
 
       data.forEach((e) => {
-        rowsdata += `<tr>
+        rowsdata += `<tr class="component-item">
                         <td><img width=100 height=100 src="${e.image}"></td>
                         <td>${e.name}</td>
                         <td><a href="${e.link}">link</td>
@@ -455,7 +455,7 @@ async function selectComponent(req, res) {
                                     `;
 
       data.forEach((e) => {
-        rowsdata += `<tr>
+        rowsdata += `<tr class="component-item">
                         <td><img width=100 height=100 src="${e.image}"></td>
                         <td>${e.name}</td>
                         <td><a href="${e.link}">link</td>
@@ -513,7 +513,7 @@ async function selectComponent(req, res) {
                                     `;
 
       data.forEach((e) => {
-        rowsdata += `<tr>
+        rowsdata += `<tr class="component-item">
                         <td><img width=100 height=100 src="${e.image}"></td>
                         <td>${e.name}</td>
                         <td><a href="${e.link}">link</td>
@@ -579,7 +579,7 @@ async function selectComponent(req, res) {
         });
         socket_list_html += '</ul>';
 
-        rowsdata += `<tr>
+        rowsdata += `<tr class="component-item">
                         <td><img width=100 height=100 src="${e.image}"></td>
                         <td>${e.name}</td>
                         <td><a href="${e.link}">link</td>
@@ -639,7 +639,7 @@ async function selectComponent(req, res) {
                                     `;
 
       data.forEach((e) => {
-        rowsdata += `<tr>
+        rowsdata += `<tr class="component-item">
                         <td><img width=100 height=100 src="${e.image}"></td>
                         <td>${e.name}</td>
                         <td><a href="${e.link}">link</td>

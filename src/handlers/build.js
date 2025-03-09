@@ -614,7 +614,7 @@ async function searchBuild(req, res) {
       e.desc_.split('ÆĶ').forEach((descItem) => {
         desc += `<span class="w3-tag w3-blue" style="border-radius: 5px; font-size: 12px; margin: 10px 10px 10px 0; white-space: pre-wrap">${descItem}</span>`;
       });
-      build_list += `<div style="display: flex; align-items: center">
+      build_list += `<div style="display: flex; align-items: center" class="build-div">
                       <a href="/build?id=${e.id}" class="select-build">
                         <div style="display: flex; flex-direction: column">
                           <span>${e.name === null || e.name == '' ? `Build của ${e.username + ' #' + e.id}` : e.name}</span>

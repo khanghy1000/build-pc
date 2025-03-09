@@ -358,7 +358,7 @@
             <tr>
                 <th><h3>Mainboard</h3></th>
                 
-                <td>
+                <td id="mb">
                     <% if (board_id != null) { %>
                         <a href="/component-select/mb?build=<%= build_id %>&id=<%=board_id%>" style="display: flex; align-items:center">
                 
@@ -370,12 +370,12 @@
                     
                 </td>
                 <% if (idcheck == 1 && username == build_username) { %>
-                    <td><a href="/component-select/mb?build=<%= build_id %>" class="select-button">Select</a></td>
+                    <td><a href="/component-select/mb?build=<%= build_id %>" class="select-button" id="select-mb">Select</a></td>
                 <% } %>
             </tr>
             <tr>
                 <th><h3>CPU</h3></th>
-                <td>
+                <td id="cpu">
                     <% if (cpu_id != null) { %>
                         <a href="/component-select/cpu?build=<%= build_id %>&id=<%= cpu_id %>" style="display: flex; align-items:center">
                         <img width=100 height=100 src="<%= cpu_image %>">
@@ -387,12 +387,12 @@
 
                 </td>
                 <% if (idcheck == 1 && username == build_username) { %>
-                    <td><a href="/component-select/cpu?build=<%= build_id %>" class="select-button">Select</a></td>
+                    <td><a href="/component-select/cpu?build=<%= build_id %>" class="select-button" id="select-cpu">Select</a></td>
                 <% } %>
             </tr>
             <tr>
                 <th><h3>VGA</h3></th>
-                <td style="display: flex; align-items:center; justify-content: space-between">
+                <td style="display: flex; align-items:center; justify-content: space-between" id="vga">
                     <% if (vga_id != null) { %>
                         <a href="/component-select/vga?build=<%= build_id %>&id=<%= vga_id %>" style="display: flex; align-items:center">
                         <img width=100 height=100 src="<%= vga_image %>">
@@ -405,30 +405,30 @@
                     <% } %>
                 </td>
                 <% if (idcheck == 1 && username == build_username) { %>
-                    <td><a href="/component-select/vga?build=<%= build_id %>" class="select-button">Select</a></td>
+                    <td><a href="/component-select/vga?build=<%= build_id %>" class="select-button" id="select-vga">Select</a></td>
                 <% } %>
             </tr>
             <tr>
                 <th><h3>Memory</h3></th>
-                <td>
+                <td id="ram">
                     <%- ram_decs %>
                 </td>
                 <% if (idcheck == 1 && username == build_username) { %>
-                    <td><a href="/component-select/ram?build=<%= build_id %>" class="select-button">Select</a></td>
+                    <td><a href="/component-select/ram?build=<%= build_id %>" class="select-button" id="select-ram">Select</a></td>
                 <% } %>               
             </tr>
             <tr>
                 <th><h3>Storage</h3></th>
-                <td>
+                <td id="storage">
                     <%- storage_decs %>
                 </td>
                 <% if (idcheck == 1 && username == build_username) { %>
-                    <td><a href="/component-select/storage?build=<%= build_id %>" class="select-button">Select</a></td>
+                    <td><a href="/component-select/storage?build=<%= build_id %>" class="select-button" id="select-storage">Select</a></td>
                 <% } %>
             </tr>
             <tr>
                 <th><h3>PSU</h3></th>
-                <td>
+                <td id="psu">
                     <% if (psu_id != null) { %>
                         <a href="/component-select/psu?build=<%= build_id %>&id=<%= psu_id %>" style="display: flex; align-items:center">
                             <img width=100 height=100 src="<%= psu_image %>">
@@ -439,13 +439,13 @@
                     <% } %>
                 </td>
                 <% if (idcheck == 1 && username == build_username) { %>
-                    <td><a href="/component-select/psu?build=<%= build_id %>" class="select-button">Select</a></td>
+                    <td><a href="/component-select/psu?build=<%= build_id %>" class="select-button" id="select-psu">Select</a></td>
                 <% } %>
             </tr>
             <tr>
             
                 <th><h3>Cooler</h3></th>
-                <td>
+                <td id="cooler">
                     <% if (cooler_id != null) { %>
                         <a href="/component-select/cooler?build=<%= build_id %>&id=<%= cooler_id %>" style="display: flex; align-items:center">
                             <img width=100 height=100 src="<%= cooler_image %>">
@@ -455,13 +455,13 @@
                     <% } %>
                 </td>
                 <% if (idcheck == 1 && username == build_username) { %>
-                    <td><a href="/component-select/cooler?build=<%= build_id %>" class="select-button">Select</a></td>
+                    <td><a href="/component-select/cooler?build=<%= build_id %>" class="select-button" id="select-cooler">Select</a></td>
                 <% } %>
             
             </tr>
             <tr>
                 <th><h3>Case</h3></th>
-                <td>
+                <td id="case">
                     <% if (case_id != null) { %>
                         <a href="/component-select/case?build=<%= build_id %>&id=<%= case_id %>" style="display: flex; align-items:center">
                             <img width=100 height=100 src="<%= case_image %>">
@@ -472,7 +472,7 @@
                     <% } %>
                 </td>
                 <% if (idcheck == 1 && username == build_username) { %>
-                    <td><a href="/component-select/case?build=<%= build_id %>" class="select-button">Select</a></td>
+                    <td><a href="/component-select/case?build=<%= build_id %>" class="select-button" id="select-case">Select</a></td>
                 <% } %>
             </tr>
             
