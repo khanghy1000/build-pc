@@ -583,81 +583,57 @@ async function getBuildListPublic(req, res) {
 
 async function searchBuild(req, res) {
   try {
-    await fetch('http://192.168.5.47:21000/getBuild', {
-      method: 'POST',
-      body: JSON.stringify({
-        user_description: req.query.user_description,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((data) => data.json())
-      .then(async (data2) => {
-        let arg = '';
-        if (JSON.parse(data2).length > 0) {
-          arg = 'and (';
-          JSON.parse(data2).forEach((e) => {
-            arg += ` id = ${e.id} or`;
-          });
-          arg = arg.substr(0, arg.length - 2);
-          arg += ')';
-        }
+    const userDescription = req.query.user_description;
+    const idcheck = (
+      await client.query(
+        `select count(username) from "USERS" where username = $1 and password = $2`,
+        [req.cookies['username'], req.cookies['password']]
+      )
+    ).rows[0].count;
 
-        const idcheck = (
-          await client.query(
-            `select count(username) from "USERS" where username = $1 and password = $2`,
-            [req.cookies['username'], req.cookies['password']]
+    const data = (
+      await client.query(
+        `SELECT id, name, username, desc_ FROM (
+          SELECT "BUILD_DESC".build_id, string_agg("desc", 'ÆĶ') as desc_ 
+          FROM "BUILD_DESC"
+          JOIN "BUILDs" ON "BUILD_DESC".build_id = "BUILDs".id
+          WHERE "BUILDs".status = true AND (
+            "BUILDs".name ILIKE '%' || $1 || '%' OR
+            "BUILD_DESC".desc ILIKE '%' || $1 || '%'
           )
-        ).rows[0].count;
+          GROUP BY "BUILD_DESC".build_id
+        ) AS build_data
+        LEFT JOIN "BUILDs" ON "BUILDs".id = build_data.build_id`,
+        [userDescription]
+      )
+    ).rows;
 
-        try {
-          const data = (
-            await client.query(`
-                select id, name, username, desc_ from (select "BUILD_DESC".build_id, string_agg("desc", 'ÆĶ') as desc_ from (select * from "BUILDs" where status = true ${arg})
-                join "BUILD_DESC" ON "BUILD_DESC".build_id = id
-                group by "BUILD_DESC".build_id)
-                left join "BUILDs" ON "BUILDs".id = build_id
-            `)
-          ).rows;
-          let build_list = '';
-
-          data.forEach((e) => {
-            let desc = ``;
-            e.desc_.split('ÆĶ').forEach((e) => {
-              desc += `<span class="w3-tag w3-blue" style="border-radius: 5px; font-size: 12px; margin: 10px 10px 10px 0; white-space: pre-wrap">${e}</span>`;
-            });
-            build_list += `<div style="display: flex; align-items: center">
-                            <a href="/build?id=${e.id}" class="select-build">
-                                <div style="display: flex; flex-direction: column">
-                                    <span>${
-                                      e.name === null || e.name == ''
-                                        ? `Build của ${
-                                            e.username + ' #' + e.id
-                                          }`
-                                        : e.name
-                                    }</span>
-                                     <div style="display: flex; align-items: center; flex-wrap: wrap">
-                                        ${desc}
-                                     </div>
-                                </div>
-                                
-                            </a>
-                            <a class="select-button" href="/create_build?id=${e.id}">Add to your build</a>
-                            </div>`;
-          });
-
-          res.render('views/searchBuild', {
-            idcheck: idcheck,
-            username: req.cookies['username'],
-            user_description: req.query.user_description,
-            length: data.length,
-            build_list: build_list,
-          });
-        } catch (e) {
-          res.sendStatus(500);
-        }
+    let build_list = '';
+    data.forEach((e) => {
+      let desc = '';
+      e.desc_.split('ÆĶ').forEach((descItem) => {
+        desc += `<span class="w3-tag w3-blue" style="border-radius: 5px; font-size: 12px; margin: 10px 10px 10px 0; white-space: pre-wrap">${descItem}</span>`;
       });
+      build_list += `<div style="display: flex; align-items: center">
+                      <a href="/build?id=${e.id}" class="select-build">
+                        <div style="display: flex; flex-direction: column">
+                          <span>${e.name === null || e.name == '' ? `Build của ${e.username + ' #' + e.id}` : e.name}</span>
+                          <div style="display: flex; align-items: center; flex-wrap: wrap">
+                            ${desc}
+                          </div>
+                        </div>
+                      </a>
+                      <a class="select-button" href="/create_build?id=${e.id}">Add to your build</a>
+                    </div>`;
+    });
+
+    res.render('views/searchBuild', {
+      idcheck: idcheck,
+      username: req.cookies['username'],
+      user_description: userDescription,
+      length: data.length,
+      build_list: build_list,
+    });
   } catch (e) {
     res.redirect('/');
   }
