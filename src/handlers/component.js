@@ -50,6 +50,9 @@ async function deleteComponent(req, res) {
           `delete from "STORAGE_DETAILS" where build_id = $1`,
           [req.query['build']]
         );
+        await client.query(`delete from "BUILD_DESC" where build_id = $1`, [
+          req.query['build'],
+        ]);
         await client.query(`delete from "BUILDs" where id = $1`, [
           req.query['build'],
         ]);
