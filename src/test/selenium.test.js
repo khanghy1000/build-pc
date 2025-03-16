@@ -10,17 +10,18 @@ const {
 jest.setTimeout(5 * 60 * 1000);
 
 let driver;
+const actionDelay = 1500;
 
 beforeAll(async () => {
   driver = await new Builder().forBrowser('chrome').build();
   await driver.get('http://localhost:9000/login');
-  await driver.sleep(1500);
+  await driver.sleep(actionDelay);
   await driver.findElement(By.name('username')).sendKeys('khanghy1000');
   await driver.findElement(By.name('password')).sendKeys('Test12345*');
-  await driver.sleep(1500);
+  await driver.sleep(actionDelay);
   await driver.findElement(By.css('button[type=submit]')).click();
   await driver.wait(until.urlIs('http://localhost:9000/'), 5000);
-  await driver.sleep(1500);
+  await driver.sleep(actionDelay);
 });
 
 afterAll(async () => {
@@ -42,11 +43,11 @@ describe('Component Search Tests', () => {
   componentTests.forEach(({ type, filter }) => {
     test(`Search ${type.toUpperCase()} Components`, async () => {
       await driver.get(`http://localhost:9000/component-select/${type}`);
-      await driver.sleep(1500);
+      await driver.sleep(actionDelay);
       await driver.findElement(By.name('filter')).sendKeys(filter);
-      await driver.sleep(1500);
+      await driver.sleep(actionDelay);
       await driver.findElement(By.id('submit-search')).click();
-      await driver.sleep(1500);
+      await driver.sleep(actionDelay);
       const results = await driver.findElements(By.css('.component-item'));
       expect(results.length).toBeGreaterThan(0);
     });
@@ -56,18 +57,18 @@ describe('Component Search Tests', () => {
 describe('Build Tests', () => {
   test('Search Public Build', async () => {
     await driver.get('http://localhost:9000/build_list_public');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('user_description')).sendKeys('tầm trung');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     const results = await driver.findElements(By.css('.build-div'));
     expect(results.length).toBeGreaterThan(0);
   });
 
   test('Make New Build', async () => {
     await driver.get('http://localhost:9000/create_build');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('input[name="name"]')).clear();
     const buildName = 'Test Build ' + Math.floor(Math.random() * 1000);
     await driver.findElement(By.css('input[name="name"]'));
@@ -75,91 +76,91 @@ describe('Build Tests', () => {
     await driver
       .findElement(By.css('input[name="name"]'))
       .sendKeys(buildName + '\n');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select Mainboard
     await driver.findElement(By.id('select-mb')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('X870E');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select CPU
     await driver.findElement(By.id('select-cpu')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('AMD Ryzen 7 7700X');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select VGA
     await driver.findElement(By.id('select-vga')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver
       .findElement(By.name('filter'))
       .sendKeys('Asus TUF GAMING GeForce RTX 4080 SUPER');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select RAM
     await driver.findElement(By.id('select-ram')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('DDR5-4800');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select Storage
     await driver.findElement(By.id('select-storage')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('Crucial BX500');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select PSU
     await driver.findElement(By.id('select-psu')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('NZXT E850');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select Cooler
     await driver.findElement(By.id('select-cooler')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver
       .findElement(By.name('filter'))
       .sendKeys('Asus ROG STRIX LC II ARGB');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select Case
     await driver.findElement(By.id('select-case')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('Antec NX100');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     expect(
       await driver
@@ -200,7 +201,7 @@ describe('Build Tests', () => {
 
   test('Show Build Problems', async () => {
     await driver.get('http://localhost:9000/create_build');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('input[name="name"]')).clear();
     const buildName =
       'Test Build with problems ' + Math.floor(Math.random() * 1000);
@@ -209,95 +210,95 @@ describe('Build Tests', () => {
     await driver
       .findElement(By.css('input[name="name"]'))
       .sendKeys(buildName + '\n');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select Mainboard
     await driver.findElement(By.id('select-mb')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('ASRock B660M Pro RS');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select CPU
     await driver.findElement(By.id('select-cpu')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver
       .findElement(By.name('filter'))
       .sendKeys('AMD Threadripper 3990X');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select VGA
     await driver.findElement(By.id('select-vga')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver
       .findElement(By.name('filter'))
       .sendKeys('PNY VERTO GeForce RTX 4090');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select RAM
     await driver.findElement(By.id('select-ram')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver
       .findElement(By.name('filter'))
       .sendKeys('Samsung M393B5170FH0-CH9 4 GB');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select Storage
     await driver.findElement(By.id('select-storage')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('Leven JS600');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select PSU
     await driver.findElement(By.id('select-psu')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('Logisys PS480D2');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select Cooler
     await driver.findElement(By.id('select-cooler')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver
       .findElement(By.name('filter'))
       .sendKeys('Thermaltake Gravity A2');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     // Select Case
     await driver.findElement(By.id('select-case')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys('Silverstone SG13 V2');
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
     await driver.findElement(By.css('.select-button')).click();
-    await driver.sleep(1500);
+    await driver.sleep(actionDelay);
 
     const ramMainboardProblem = await driver.findElement(
       By.css('.ram-mainboard-problem')
