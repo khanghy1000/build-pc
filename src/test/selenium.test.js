@@ -28,92 +28,28 @@ afterAll(async () => {
 });
 
 describe('Component Search Tests', () => {
-  test('Search CPU Components', async () => {
-    await driver.get('http://localhost:9000/component-select/cpu');
-    await driver.sleep(1500);
-    await driver.findElement(By.name('filter')).sendKeys('Intel');
-    await driver.sleep(1500);
-    await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.component-item'));
-    expect(results.length).toBeGreaterThan(0);
-  });
+  const componentTests = [
+    { type: 'cpu', filter: 'Intel' },
+    { type: 'mb', filter: 'ASUS' },
+    { type: 'ram', filter: 'Corsair' },
+    { type: 'vga', filter: 'NVIDIA' },
+    { type: 'psu', filter: 'EVGA' },
+    { type: 'cooler', filter: 'Cooler Master' },
+    { type: 'storage', filter: 'Samsung' },
+    { type: 'case', filter: 'NZXT' },
+  ];
 
-  test('Search Mainboard Components', async () => {
-    await driver.get('http://localhost:9000/component-select/mb');
-    await driver.sleep(1500);
-    await driver.findElement(By.name('filter')).sendKeys('ASUS');
-    await driver.sleep(1500);
-    await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.component-item'));
-    expect(results.length).toBeGreaterThan(0);
-  });
-
-  test('Search RAM Components', async () => {
-    await driver.get('http://localhost:9000/component-select/ram');
-    await driver.sleep(1500);
-    await driver.findElement(By.name('filter')).sendKeys('Corsair');
-    await driver.sleep(1500);
-    await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.component-item'));
-    expect(results.length).toBeGreaterThan(0);
-  });
-
-  test('Search VGA Components', async () => {
-    await driver.get('http://localhost:9000/component-select/vga');
-    await driver.sleep(1500);
-    await driver.findElement(By.name('filter')).sendKeys('NVIDIA');
-    await driver.sleep(1500);
-    await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.component-item'));
-    expect(results.length).toBeGreaterThan(0);
-  });
-
-  test('Search PSU Components', async () => {
-    await driver.get('http://localhost:9000/component-select/psu');
-    await driver.sleep(1500);
-    await driver.findElement(By.name('filter')).sendKeys('EVGA');
-    await driver.sleep(1500);
-    await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.component-item'));
-    expect(results.length).toBeGreaterThan(0);
-  });
-
-  test('Search CPU Cooler Components', async () => {
-    await driver.get('http://localhost:9000/component-select/cooler');
-    await driver.sleep(1500);
-    await driver.findElement(By.name('filter')).sendKeys('Cooler Master');
-    await driver.sleep(1500);
-    await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.component-item'));
-    expect(results.length).toBeGreaterThan(0);
-  });
-
-  test('Search Storage Components', async () => {
-    await driver.get('http://localhost:9000/component-select/storage');
-    await driver.sleep(1500);
-    await driver.findElement(By.name('filter')).sendKeys('Samsung');
-    await driver.sleep(1500);
-    await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.component-item'));
-    expect(results.length).toBeGreaterThan(0);
-  });
-
-  test('Search Case Components', async () => {
-    await driver.get('http://localhost:9000/component-select/case');
-    await driver.sleep(1500);
-    await driver.findElement(By.name('filter')).sendKeys('NZXT');
-    await driver.sleep(1500);
-    await driver.findElement(By.id('submit-search')).click();
-    await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.component-item'));
-    expect(results.length).toBeGreaterThan(0);
+  componentTests.forEach(({ type, filter }) => {
+    test(`Search ${type.toUpperCase()} Components`, async () => {
+      await driver.get(`http://localhost:9000/component-select/${type}`);
+      await driver.sleep(1500);
+      await driver.findElement(By.name('filter')).sendKeys(filter);
+      await driver.sleep(1500);
+      await driver.findElement(By.id('submit-search')).click();
+      await driver.sleep(1500);
+      const results = await driver.findElements(By.css('.component-item'));
+      expect(results.length).toBeGreaterThan(0);
+    });
   });
 });
 
