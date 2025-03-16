@@ -54,6 +54,17 @@ describe('Component Search Tests', () => {
 });
 
 describe('Build Tests', () => {
+  test('Search Public Build', async () => {
+    await driver.get('http://localhost:9000/build_list_public');
+    await driver.sleep(1500);
+    await driver.findElement(By.name('user_description')).sendKeys('tầm trung');
+    await driver.sleep(1500);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(1500);
+    const results = await driver.findElements(By.css('.build-div'));
+    expect(results.length).toBeGreaterThan(0);
+  });
+
   test('Make New Build', async () => {
     await driver.get('http://localhost:9000/create_build');
     await driver.sleep(1500);
@@ -182,16 +193,133 @@ describe('Build Tests', () => {
     expect(
       (await driver.findElement(By.id('case')).findElements(By.css('*'))).length
     ).toBeGreaterThan(0);
+
+    const problemsDiv = await driver.findElements(By.id('problems'));
+    expect(problemsDiv.length).toBe(0);
   });
 
-  test('Search Public Build', async () => {
-    await driver.get('http://localhost:9000/build_list_public');
+  test('Show Build Problems', async () => {
+    await driver.get('http://localhost:9000/create_build');
     await driver.sleep(1500);
-    await driver.findElement(By.name('user_description')).sendKeys('tầm trung');
+    await driver.findElement(By.css('input[name="name"]')).clear();
+    const buildName =
+      'Test Build with problems ' + Math.floor(Math.random() * 1000);
+    await driver.findElement(By.css('input[name="name"]'));
+
+    await driver
+      .findElement(By.css('input[name="name"]'))
+      .sendKeys(buildName + '\n');
+    await driver.sleep(1500);
+
+    // Select Mainboard
+    await driver.findElement(By.id('select-mb')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.name('filter')).sendKeys('ASRock B660M Pro RS');
     await driver.sleep(1500);
     await driver.findElement(By.id('submit-search')).click();
     await driver.sleep(1500);
-    const results = await driver.findElements(By.css('.build-div'));
-    expect(results.length).toBeGreaterThan(0);
+    await driver.findElement(By.css('.select-button')).click();
+    await driver.sleep(1500);
+
+    // Select CPU
+    await driver.findElement(By.id('select-cpu')).click();
+    await driver.sleep(1500);
+    await driver
+      .findElement(By.name('filter'))
+      .sendKeys('AMD Threadripper 3990X');
+    await driver.sleep(1500);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.css('.select-button')).click();
+    await driver.sleep(1500);
+
+    // Select VGA
+    await driver.findElement(By.id('select-vga')).click();
+    await driver.sleep(1500);
+    await driver
+      .findElement(By.name('filter'))
+      .sendKeys('PNY VERTO GeForce RTX 4090');
+    await driver.sleep(1500);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.css('.select-button')).click();
+    await driver.sleep(1500);
+
+    // Select RAM
+    await driver.findElement(By.id('select-ram')).click();
+    await driver.sleep(1500);
+    await driver
+      .findElement(By.name('filter'))
+      .sendKeys('Samsung M393B5170FH0-CH9 4 GB');
+    await driver.sleep(1500);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.css('.select-button')).click();
+    await driver.sleep(1500);
+
+    // Select Storage
+    await driver.findElement(By.id('select-storage')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.name('filter')).sendKeys('Leven JS600');
+    await driver.sleep(1500);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.css('.select-button')).click();
+    await driver.sleep(1500);
+
+    // Select PSU
+    await driver.findElement(By.id('select-psu')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.name('filter')).sendKeys('Logisys PS480D2');
+    await driver.sleep(1500);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.css('.select-button')).click();
+    await driver.sleep(1500);
+
+    // Select Cooler
+    await driver.findElement(By.id('select-cooler')).click();
+    await driver.sleep(1500);
+    await driver
+      .findElement(By.name('filter'))
+      .sendKeys('Thermaltake Gravity A2');
+    await driver.sleep(1500);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.css('.select-button')).click();
+    await driver.sleep(1500);
+
+    // Select Case
+    await driver.findElement(By.id('select-case')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.name('filter')).sendKeys('Silverstone SG13 V2');
+    await driver.sleep(1500);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(1500);
+    await driver.findElement(By.css('.select-button')).click();
+    await driver.sleep(1500);
+
+    const ramMainboardProblem = await driver.findElement(
+      By.css('.ram-mainboard-problem')
+    );
+    const cpuMainboardProblem = await driver.findElement(
+      By.css('.cpu-mainboard-problem')
+    );
+
+    const mainboardCaseSizeProblem = await driver.findElement(
+      By.css('.mainboard-case-size-problem')
+    );
+    const psuCaseSizeProblem = await driver.findElement(
+      By.css('.psu-case-size-problem')
+    );
+    const vgaCaseSizeProblem = await driver.findElement(
+      By.css('.vga-case-size-problem')
+    );
+
+    expect(await ramMainboardProblem.getText()).toBeTruthy();
+    expect(await cpuMainboardProblem.getText()).toBeTruthy();
+    expect(await mainboardCaseSizeProblem.getText()).toBeTruthy();
+    expect(await psuCaseSizeProblem.getText()).toBeTruthy();
+    expect(await vgaCaseSizeProblem.getText()).toBeTruthy();
   });
 });

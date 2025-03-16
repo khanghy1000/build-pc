@@ -317,7 +317,7 @@ async function getBuild(req, res) {
         ).rows[0].count;
         if (ramcheck == 0)
           problems += `
-          <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;">Ram ${e.name} không phù hợp với main</p>
+          <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;" class="ram-mainboard-problem">Ram ${e.name} không phù hợp với main</p>
         `;
       }
       ram_total_capacity += e.capacity * e.amount;
@@ -404,36 +404,36 @@ async function getBuild(req, res) {
 
     if (build.cpu_socket != build.mb_socket)
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;">CPU và Mainboard không phù hợp</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;"  class="cpu-mainboard-problem">CPU và Mainboard không phù hợp</p>
     `;
 
     if (build.mb_max_mem != null && ram_total_capacity > build.mb_max_mem)
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;">Dung lượng ram vượt quá dung lượng cho phép của Mainboard (${build.mb_max_mem})</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;" class="ram-mainboard-capacity-problem">Dung lượng ram vượt quá dung lượng cho phép của Mainboard (${build.mb_max_mem})</p>
     `;
 
     if (build.cpu_max_mem != null && ram_total_capacity > build.cpu_max_mem)
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;">Dung lượng ram vượt quá dung lượng cho phép của CPU (${build.cpu_max_mem})</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;" class="ram-cpu-capacity-problem">Dung lượng ram vượt quá dung lượng cho phép của CPU (${build.cpu_max_mem})</p>
     `;
 
     if (build.mem_slots != null && ram_quantity > build.mem_slots)
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;">Số lượng ram vượt quá số lượng cho phép của Mainboard (${build.mem_slots} khe cắm)</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;"  class="ram-mainboard-quantity-problem">Số lượng ram vượt quá số lượng cho phép của Mainboard (${build.mem_slots} khe cắm)</p>
     `;
 
     if (storage_3_quantity + storage_2_quantity > build.sata_slots)
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;">Số lượng ổ cứng vượt quá số lượng cho phép của Mainboard (${build.sata_slots} khe cắm)</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #ffd5d5;border: #ff7c7c 2px solid;border-radius: 5px;padding: 10px;color: brown;" class="storage-mainboard-quantity-problem">Số lượng ổ cứng vượt quá số lượng cho phép của Mainboard (${build.sata_slots} khe cắm)</p>
     `;
 
     if (storage_3_quantity > build.sata_slots_3)
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;">Số lượng ổ cứng 3.5" nhiều hơn so với số chỗ lắp trên thùng máy</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;" class="storage-case-3_5-capacity-problem">Số lượng ổ cứng 3.5" nhiều hơn so với số chỗ lắp trên thùng máy</p>
     `;
     if (storage_2_quantity > build.sata_slots_2 + build.sata_slots_3)
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;">Số lượng ổ cứng 2.5" nhiều hơn so với số chỗ lắp trên thùng máy</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;" class="storage-case-2_5-capacity-problem">Số lượng ổ cứng 2.5" nhiều hơn so với số chỗ lắp trên thùng máy</p>
     `;
 
     if (
@@ -442,7 +442,7 @@ async function getBuild(req, res) {
       build.mb_form != build.case_form
     )
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;">Mainboard có thể lớn hơn hoặc quá nhỏ so với thùng máy</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;" class="mainboard-case-size-problem">Mainboard có thể lớn hơn hoặc quá nhỏ so với thùng máy</p>
     `;
 
     if (
@@ -451,12 +451,12 @@ async function getBuild(req, res) {
       build.case_form != build.psu_form
     )
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;">Nguồn có thế lớn hơn so với kích thước thùng máy</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;" class="psu-case-size-problem">Nguồn có thế lớn hơn so với kích thước thùng máy</p>
     `;
 
     if (build.max_vga_len != null && build.vga_len > build.max_vga_len)
       problems += `
-    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;">VGA có chiều dài hơn chiều dài thùng máy</p>
+    <p onclick="this.style.height = 0; this.style.margin = 0; this.style.padding = 0; this.style.opacity = 0; this.style.borderWidth = 0" style="width: 200px; cursor: pointer; transition: 0.2s; overflow: hidden; background: #fff4c9;border: #ffcb67 2px solid;border-radius: 5px;padding: 10px;color: #9f7a32;" class="vga-case-size-problem">VGA có chiều dài hơn chiều dài thùng máy</p>
     `;
 
     if (build.status == 0 && req.cookies['username'] != build.username) {

@@ -313,10 +313,11 @@
 
         
     </div>
-
-    <div style="position: absolute;right: 0;margin: 20px;z-index: 2;">
-        <%- problems %>
-    </div>
+    <% if (problems) { %>
+        <div style="position: absolute;right: 0;margin: 20px;z-index: 2;" id="problems">
+            <%- problems %>
+        </div>
+    <% } %>
 
     <div style="margin: 50px auto 100px auto; width: 70%; height: fit-content;top: 0;bottom: 0; display: flex; flex-direction: column; color: aliceblue; padding-bottom: 200px;">
         <% if (idcheck == 1 && username == build_username) { %>
