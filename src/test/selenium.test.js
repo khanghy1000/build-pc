@@ -28,7 +28,7 @@ afterAll(async () => {
   await driver.quit();
 });
 
-test('Component Search Tests', () => {
+test('Component Search Test', () => {
   const componentTests = [
     { type: 'cpu', filter: 'Intel' },
     { type: 'mb', filter: 'ASUS' },
