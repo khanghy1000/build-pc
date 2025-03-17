@@ -48,6 +48,7 @@ app.use(json());
 app.use(cookieParser());
 app.set('views', './src');
 app.set('view engine', 'ejs');
+app.use(express.static('./src/static'));
 
 app.get('/', getHomepage);
 app.get('/guide', getGuide);

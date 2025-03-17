@@ -1,199 +1,244 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="utf-8" />
 
-<head>
-    <meta charset='utf-8'>
+    <meta
+      name="viewport"
+      content="width=device-width,minimum-scale=1,initial-scale=1"
+    />
+    <meta property="og:title" content="Trang build PC số 1 Việt Nam" />
+    <meta property="og:image" content="http://localhost:9000/koishi.png" />
 
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-    <meta property="og:title" content="Trang build PC số 1 Việt Nam"/>
-    <meta property="og:image" content="https://server.yurixahri.net/Photos/koishi.png"/>
-    
-    <meta property="og:url" content="/"/>
-    <meta property="og:site_name" content="Koishi Build PC"/>
-    <meta property="og:description" content="Trang build PC số 1 Việt Nam">
-    <meta property="og:type" content="website"/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:title" content="Trang build PC số 1 Việt Nam"/>
-    <meta name="twitter:description" content="Trang build PC số 1 Việt Nam">
-    <meta name="twitter:image" content="https://server.yurixahri.net/Photos/koishi.png"/>
+    <meta property="og:url" content="/" />
+    <meta property="og:site_name" content="Koishi Build PC" />
+    <meta property="og:description" content="Trang build PC số 1 Việt Nam" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Trang build PC số 1 Việt Nam" />
+    <meta name="twitter:description" content="Trang build PC số 1 Việt Nam" />
+    <meta name="twitter:image" content="http://localhost:9000/koishi.png" />
 
     <title>PC Builder</title>
 
-    
-    <link rel="shortcut icon" href="https://server.yurixahri.net/Photos/koishi.png">
+    <link rel="shortcut icon" href="http://localhost:9000/koishi.png" />
 
     <style>
-        body{
-            height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: linear-gradient(to bottom, rgb(15 27 38 / 93%), rgb(15 27 38 / 96%)), url(https://server.yurixahri.net/Photos/bgpcbuild.png);
-            overflow-x: hidden;
-        }
+      body {
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-image: linear-gradient(
+            to bottom,
+            rgb(15 27 38 / 93%),
+            rgb(15 27 38 / 96%)
+          ),
+          url(https://server.yurixahri.net/Photos/bgpcbuild.png);
+        overflow-x: hidden;
+      }
 
-        ul li {
-            list-style: none;
-            margin: 0 auto;
-            border-left: 5px solid #3ca0e7;
-            
-            padding: 10px 30px 10px;
-            
-            text-decoration: none;
-            text-align: center;
-          
-        }
+      ul li {
+        list-style: none;
+        margin: 0 auto;
+        border-left: 5px solid #3ca0e7;
 
-        li a {
-            color: aliceblue;
-        }
+        padding: 10px 30px 10px;
 
-        li a:hover {
-            color: #3ca0e7;
-        }
+        text-decoration: none;
+        text-align: center;
+      }
 
-        li:hover {
-            cursor: pointer;
-        }
+      li a {
+        color: aliceblue;
+      }
 
-        .dropdown ul {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            padding-left: 0;
-            margin: 0;
-            display: none;
-            background: rgb(26, 53, 66);
-        }
+      li a:hover {
+        color: #3ca0e7;
+      }
 
-        .dropdown a, .left_cell a {
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
+      li:hover {
+        cursor: pointer;
+      }
 
-        .dropdown:hover> ul {
-            visibility: visible;
-            opacity: 1;
-            display: block;
-            
-            text-align: left;
-            
-        }
-
-
-        a {
-            text-decoration: none;
-            color: aliceblue;
-            cursor: pointer;
-        }   
-
-        #nav a:hover {
-            color: rgb(0, 136, 255);
-        }
-
-        .left_cell{
-            margin: 0 10px 0 10px;
-            height: 100px;
-        }
-
-        .center{
-            position: absolute;
-            margin: auto;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-
-        }
-
-        
-
-        
-    .snow-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999;
-    pointer-events: none;
-}
-
-.snowflake {
-    position: absolute;
-    background-color: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    pointer-events: none;
-}
-
-@keyframes fall {
-    0% {
+      .dropdown ul {
+        visibility: hidden;
         opacity: 0;
-        transform: translateY(0);
-    }
-    10% {
+        position: absolute;
+        padding-left: 0;
+        margin: 0;
+        display: none;
+        background: rgb(26, 53, 66);
+      }
+
+      .dropdown a,
+      .left_cell a {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .dropdown:hover > ul {
+        visibility: visible;
         opacity: 1;
-    }
-    100% {
-        opacity: 0.5;
-        transform: translateY(100vh);
-    }
-}
+        display: block;
 
-@keyframes diagonal-fall {
-    0% {
-        opacity: 0;
-        transform: translate(0, 0);
-    }
-    10% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.25;
-        transform: translate(10vw, 100vh);
-    }
-}
+        text-align: left;
+      }
 
-</style>
+      a {
+        text-decoration: none;
+        color: aliceblue;
+        cursor: pointer;
+      }
 
+      #nav a:hover {
+        color: rgb(0, 136, 255);
+      }
 
-</head>
+      .left_cell {
+        margin: 0 10px 0 10px;
+        height: 100px;
+      }
 
-<body>
+      .center {
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+
+      .snow-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99999;
+        pointer-events: none;
+      }
+
+      .snowflake {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        pointer-events: none;
+      }
+
+      @keyframes fall {
+        0% {
+          opacity: 0;
+          transform: translateY(0);
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.5;
+          transform: translateY(100vh);
+        }
+      }
+
+      @keyframes diagonal-fall {
+        0% {
+          opacity: 0;
+          transform: translate(0, 0);
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.25;
+          transform: translate(10vw, 100vh);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
     <div class="snow-container"></div>
-<div id="nav" style="height: 100px; display: flex; background-color: rgb(26, 53, 66); justify-content: space-between; position: relative; z-index: 2">
-        <div style="display: flex; align-items: center;">
-            <a href="/"><img src="https://server.yurixahri.net/Photos/koishi.png" width="100" class="left_cell"></a>
+    <div
+      id="nav"
+      style="
+        height: 100px;
+        display: flex;
+        background-color: rgb(26, 53, 66);
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+      "
+    >
+      <div style="display: flex; align-items: center">
+        <a href="/"
+          ><img
+            src="http://localhost:9000/koishi.png"
+            width="100"
+            class="left_cell"
+        /></a>
 
-            <div class="dropdown left_cell">
-                <a href="#">PRODUCTS</a>
-                <ul>
-                    <li><a href="/component-select/cpu">CPU</a></li>
-                    <li><a href="/component-select/mb">MOTHERBOARD</a></li>
-                    <li><a href="/component-select/ram">RAM</a></li>
-                    <li><a href="/component-select/vga">VGA</a></li>
-                    <li><a href="/component-select/psu">PSU</a></li>
-                    <li><a href="/component-select/cooler">CPU COOLER</a></li>
-                    <li><a href="/component-select/storage">STORAGE</a></li>
-                    <li><a href="/component-select/case">CASE</a></li>
-                </ul>
-            </div>
-            
-            <div class="left_cell"><a href="/guide">GUIDE</a></div>
-            <div class="left_cell"><a href="/build_list_public">BUILDS</a></div>
+        <div class="dropdown left_cell">
+          <a href="#">PRODUCTS</a>
+          <ul>
+            <li><a href="/component-select/cpu">CPU</a></li>
+            <li><a href="/component-select/mb">MOTHERBOARD</a></li>
+            <li><a href="/component-select/ram">RAM</a></li>
+            <li><a href="/component-select/vga">VGA</a></li>
+            <li><a href="/component-select/psu">PSU</a></li>
+            <li><a href="/component-select/cooler">CPU COOLER</a></li>
+            <li><a href="/component-select/storage">STORAGE</a></li>
+            <li><a href="/component-select/case">CASE</a></li>
+          </ul>
         </div>
 
-        <div style="display: flex; align-items: center;">
-            <%- include('navbar') %>
-        </div>
-        
-        
+        <div class="left_cell"><a href="/guide">GUIDE</a></div>
+        <div class="left_cell"><a href="/build_list_public">BUILDS</a></div>
+      </div>
+
+      <div style="display: flex; align-items: center">
+        <%- include('navbar') %>
+      </div>
     </div>
-    <div style="margin: auto;position: absolute;left: 0;right: 0;width: fit-content;height: fit-content;top: 0;bottom: 0; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-        <h1 style=" color: aliceblue; text-shadow: -1px -1px 0 #2196f3, 1px -1px 0 #2196f3, -1px 1px 0 #2196f3, 2px 2px 0 #2196f3;">Start your build NOW!</h1>
-        <a href="/create_build" style=" padding: 20px; font-size: x-large; background-color: rgb(0 98 146); border-radius: 5px">START YOUR BUILD!</a>
+    <div
+      style="
+        margin: auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: fit-content;
+        height: fit-content;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      "
+    >
+      <h1
+        style="
+          color: aliceblue;
+          text-shadow:
+            -1px -1px 0 #2196f3,
+            1px -1px 0 #2196f3,
+            -1px 1px 0 #2196f3,
+            2px 2px 0 #2196f3;
+        "
+      >
+        Start your build NOW!
+      </h1>
+      <a
+        href="/create_build"
+        style="
+          padding: 20px;
+          font-size: x-large;
+          background-color: rgb(0 98 146);
+          border-radius: 5px;
+        "
+        >START YOUR BUILD!</a
+      >
     </div>
-</body>
+  </body>
 </html>
