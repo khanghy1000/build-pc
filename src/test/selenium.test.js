@@ -28,7 +28,7 @@ afterAll(async () => {
   await driver.quit();
 });
 
-test('Component Search Test', () => {
+test('Component Search Test', async() => {
   const componentTests = [
     { type: 'cpu', filter: 'Intel' },
     { type: 'mb', filter: 'ASUS' },
@@ -39,8 +39,8 @@ test('Component Search Test', () => {
     { type: 'storage', filter: 'Samsung' },
     { type: 'case', filter: 'NZXT' },
   ];
-
-  componentTests.forEach(async ({ type, filter }) => {
+  
+  for (const { type, filter } of componentTests) {
     await driver.get(`http://localhost:9000/component-select/${type}`);
     await driver.sleep(actionDelay);
     await driver.findElement(By.name('filter')).sendKeys(filter);
@@ -49,7 +49,7 @@ test('Component Search Test', () => {
     await driver.sleep(actionDelay);
     const results = await driver.findElements(By.css('.component-item'));
     expect(results.length).toBeGreaterThan(0);
-  });
+  }
 });
 
 test('Search Public Build', async () => {
