@@ -10,7 +10,7 @@ const {
 jest.setTimeout(5 * 60 * 1000);
 
 let driver;
-const actionDelay = 1500;
+const actionDelay = 0;
 
 beforeAll(async () => {
   driver = await new Builder().forBrowser('chrome').build();
@@ -28,7 +28,7 @@ afterAll(async () => {
   await driver.quit();
 });
 
-describe('Component Search Tests', () => {
+test('Component Search Tests', () => {
   const componentTests = [
     { type: 'cpu', filter: 'Intel' },
     { type: 'mb', filter: 'ASUS' },
@@ -40,17 +40,15 @@ describe('Component Search Tests', () => {
     { type: 'case', filter: 'NZXT' },
   ];
 
-  componentTests.forEach(({ type, filter }) => {
-    test(`Search ${type.toUpperCase()} Components`, async () => {
-      await driver.get(`http://localhost:9000/component-select/${type}`);
-      await driver.sleep(actionDelay);
-      await driver.findElement(By.name('filter')).sendKeys(filter);
-      await driver.sleep(actionDelay);
-      await driver.findElement(By.id('submit-search')).click();
-      await driver.sleep(actionDelay);
-      const results = await driver.findElements(By.css('.component-item'));
-      expect(results.length).toBeGreaterThan(0);
-    });
+  componentTests.forEach(async ({ type, filter }) => {
+    await driver.get(`http://localhost:9000/component-select/${type}`);
+    await driver.sleep(actionDelay);
+    await driver.findElement(By.name('filter')).sendKeys(filter);
+    await driver.sleep(actionDelay);
+    await driver.findElement(By.id('submit-search')).click();
+    await driver.sleep(actionDelay);
+    const results = await driver.findElements(By.css('.component-item'));
+    expect(results.length).toBeGreaterThan(0);
   });
 });
 
@@ -64,6 +62,41 @@ describe('Build Tests', () => {
     await driver.sleep(actionDelay);
     const results = await driver.findElements(By.css('.build-div'));
     expect(results.length).toBeGreaterThan(0);
+  });
+
+  test('Hide Private Builds', async () => {
+    await driver.get('http://localhost:9000/create_build');
+    await driver.sleep(actionDelay);
+    await driver.findElement(By.css('input[name="name"]')).clear();
+    const buildName = 'Private Build ' + Math.floor(Math.random() * 1000);
+    await driver.findElement(By.css('input[name="name"]'));
+
+    await driver
+      .findElement(By.css('input[name="name"]'))
+      .sendKeys(buildName + '\n');
+    await driver.sleep(actionDelay);
+
+    let currentUrl = await driver.getCurrentUrl();
+    const id = currentUrl.split('?id=')[1];
+    await driver.findElement(By.id('visibility-select')).click();
+    await driver.findElement(By.id('visibility-select-private')).click();
+    await driver.sleep(actionDelay);
+
+    // logout
+    await driver.get('http://localhost:9000/logout');
+    await driver.sleep(actionDelay);
+    await driver.get('http://localhost:9000/login');
+    await driver.sleep(actionDelay);
+    await driver.findElement(By.name('username')).sendKeys('test12345');
+    await driver.findElement(By.name('password')).sendKeys('Test12345*');
+    await driver.sleep(actionDelay);
+    await driver.findElement(By.css('button[type=submit]')).click();
+    await driver.sleep(actionDelay);
+
+    await driver.get(`http://localhost:9000/build?id=${id}`);
+    await driver.sleep(actionDelay);
+    currentUrl = await driver.getCurrentUrl();
+    expect(['http://localhost:9000', 'http://localhost:9000/']).toContain(currentUrl);
   });
 
   test('Make New Build', async () => {

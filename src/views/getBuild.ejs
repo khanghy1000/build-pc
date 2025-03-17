@@ -480,10 +480,10 @@
         </table>
         <br>
         <% if (idcheck == 1 && username == build_username) { %>
-            <select onchange="location = this.value;">
+            <select onchange="location = this.value;" id="visibility-select">
             <option selected disable hidden><%= !status ? `Private` : `Public` %></option>
-            <option value="/update-status?build=<%= build_id %>&status=1">Public</option>
-            <option value="/update-status?build=<%= build_id %>&status=0">Private</option>
+            <option value="/update-status?build=<%= build_id %>&status=1" id="visibility-select-public">Public</option>
+            <option value="/update-status?build=<%= build_id %>&status=0" id="visibility-select-private">Private</option>
             </select>
             <a href="/delete-component/build?build=<%= build_id %>" onclick="return confirm('Bạn có muốn xóa build?');" style="color: red">Xóa build</a> 
         <% } %>
